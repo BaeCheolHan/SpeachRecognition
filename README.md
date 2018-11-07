@@ -8,7 +8,5 @@ SpeachRecognition-demo
 
 실행 방법 
 --------
-* 프로젝트 폴더에서 실행 cmd : `npm install`
-* 빌드 및 실행
-    * 빌드 : `npm install`
-    * 실행 : `node ./bin/www`
+* 빌드방법 : 프로젝트 폴더에서 'npm install' 명령어 입력
+* 프로젝트 폴더에서 실행 cmd : `node ./bin/www`
