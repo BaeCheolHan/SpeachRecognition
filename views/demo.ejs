@@ -2,11 +2,12 @@
 <html>
 
 <head>
-  <script src="/js/speachtotext.js"></script>
+  <!-- <script src="/js/speachtotext.js"></script> -->
   <script src="/lib/annyang.js"></script>
+  <script src="/lib/speechkitt.js"></script>
 
   <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script> -->
-  <script>
+  <!-- <script>
     annyang.setLanguage("ko");
     annyang.start({
       autoRestart: true,
@@ -36,31 +37,48 @@
         '<br/> 결과값 = ' + final_transcript;
       console.log('interim=' + interim_transcript + ' | final= ' + final_transcript);
     }
-  </script>
+  </script> -->
 </head>
 
 <body class="" id="grid">
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/speechkitt.min.js"></script>
+  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/speechkitt.min.js"></script> -->
   <script>
     if (annyang) {
       // Add our commands to annyang
       annyang.addCommands({
-        'hello': function() {
+        '안녕': function() {
           alert('Hello world!');
         }
       });
+      // Set Languages
+      annyang.setLanguage("ko");
 
       // Tell KITT to use annyang
       SpeechKITT.annyang();
 
+      annyang.addCallback("start", function() {
+        console.log("start");
+      });
+
+      annyang.addCallback("end", function() {
+        console.log("end");
+      });
+
+      annyang.addCallback("soundstart", function() {
+        console.log("soundstart");
+      });
+
+      annyang.addCallback("result", function(data) {
+        console.log("result");
+        console.log(data[0]);
+      });
       // Define a stylesheet for KITT to use
-      SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css');
+      SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/themes/flat.css');
 
       // Render KITT's interface
       SpeechKITT.vroom();
     }
-  </script> -->
+  </script>
   <br /><br />
   한국어 음성 처리 테스트<br /><br />
   <div id='result'>
