@@ -43,6 +43,7 @@
 <body class="" id="grid">
   <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/speechkitt.min.js"></script> -->
   <script>
+  var result;
     if (annyang) {
       // Add our commands to annyang
       annyang.addCommands({
@@ -71,9 +72,11 @@
       annyang.addCallback("result", function(data) {
         console.log("result");
         console.log(data[0]);
+        result = data[0];
+        console.log(result);
       });
       // Define a stylesheet for KITT to use
-      SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/themes/flat.css');
+      SpeechKITT.setStylesheet('css/flat.css');
 
       // Render KITT's interface
       SpeechKITT.vroom();
