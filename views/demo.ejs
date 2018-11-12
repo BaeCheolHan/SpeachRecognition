@@ -2,48 +2,16 @@
 <html>
 
 <head>
-  <!-- <script src="/js/speachtotext.js"></script> -->
   <script src="/lib/annyang.js"></script>
   <script src="/lib/speechkitt.js"></script>
+  <script src="/lib/jQuery3.3.1.js"></script>
+  <script src=/js/resultToJsonParser.js> </script> <script src="/data/data.json"></script>
 
-  <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script> -->
-  <!-- <script>
-    annyang.setLanguage("ko");
-    annyang.start({
-      autoRestart: true,
-      continuous: true
-    })
-
-    var recognition = annyang.getSpeechRecognizer();
-    var final_transcript = '';
-
-    recognition.interimResults = true;
-
-    recognition.onresult = function(event) {
-      var interim_transcript = '';
-      final_transcript = '';
-
-      for (var i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          final_transcript += event.results[i][0].transcript;
-          console.log("final_transcript=" + final_transcript);
-        } else {
-          interim_transcript += event.results[i][0].transcript;
-          console.log("interim_transcript = " + interim_transcript);
-        }
-      }
-
-      document.getElementById('result').innerHTML = '중간값 = ' + interim_transcript +
-        '<br/> 결과값 = ' + final_transcript;
-      console.log('interim=' + interim_transcript + ' | final= ' + final_transcript);
-    }
-  </script> -->
 </head>
 
 <body class="" id="grid">
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/speechkitt.min.js"></script> -->
   <script>
-  var result;
+    var result;
     if (annyang) {
       // Add our commands to annyang
       annyang.addCommands({
@@ -57,12 +25,37 @@
       // Tell KITT to use annyang
       SpeechKITT.annyang();
 
+      var recognition = annyang.getSpeechRecognizer();
+      recognition.interimResults = true;
+
+      recognition.onresult = function(event) {
+        var interim_transcript = '';
+        final_transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; i++) {
+          if (event.results[i].isFinal) {
+            final_transcript += event.results[i][0].transcript;
+
+          } else {
+            interim_transcript += event.results[i][0].transcript;
+
+          }
+        }
+        result = final_transcript;
+
+        // parseResult(result);
+      }
+
+      // Add callback method
       annyang.addCallback("start", function() {
         console.log("start");
       });
 
       annyang.addCallback("end", function() {
         console.log("end");
+
+
+        result = "테스트입니다";
+        parseResult(result);
       });
 
       annyang.addCallback("soundstart", function() {
@@ -71,10 +64,13 @@
 
       annyang.addCallback("result", function(data) {
         console.log("result");
-        console.log(data[0]);
-        result = data[0];
-        console.log(result);
+
       });
+      annyang.addCallback("resultMatch", function(data) {
+        console.log("resultMatch");
+      });
+
+
       // Define a stylesheet for KITT to use
       SpeechKITT.setStylesheet('css/flat.css');
 

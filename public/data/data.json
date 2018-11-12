@@ -1,0 +1,16 @@
+{
+  "timer": {
+    "one": "일",
+    "minute": "분",
+    "second": "초"
+  },
+  "home": {
+    "text": "집",
+    "voice": "(집)(메인 화면)",
+    "description": "메인 화면으로 돌아갑니다."
+  },
+  "테스트": {
+    "text": "테스트",
+    "description": "테스트입니다."
+  }
+}
